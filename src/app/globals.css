@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* typewriter circle css  */
+.typewriter-container .description .font-circle {
+	transform: scale(1);
+	opacity: 1;
+	transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.typewriter-container .description .font-circle.scale-0 {
+	transform: scale(0);
+	opacity: 0;
+}

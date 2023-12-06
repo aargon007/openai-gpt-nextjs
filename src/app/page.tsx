@@ -5,28 +5,29 @@ const Home = () => {
   const features = [
     {
       id: 1,
-      title: "Draft an eregmail",
-      description: "requesting a deadline extensnbfgnfhnion for my project"
+      title: "Text Generation",
+      description: "Generate creative stories based on a given plot summary."
     },
     {
       id: 2,
-      title: "Draft an emgggail",
-      description: "requesting a deadline exfgfdgbfdtension for my project"
+      title: "Speech-to-Text",
+      description: "Transcribe spoken lectures into text for easy note-taking."
     },
     {
       id: 3,
-      title: "Draft an emartfwfil",
-      description: "requesting a deadline extefbdfbdnsion for my project"
+      title: "Image Generation",
+      description: "Create surreal images from textual descriptions or concepts."
     },
     {
       id: 4,
-      title: "Draft an email",
-      description: "requesting a deadline extension for my project"
-    },
-  ]
+      title: "Text-to-Speech",
+      description: "Convert written articles into engaging audiobooks."
+    }
+  ];
+
 
   return (
-    <main className="flex min-h-full w-screen flex-col sm:supports-[min-height:100dvh]:min-h-[100dvh] md:grid md:grid-cols-2 lg:grid-cols-[60%_40%]">
+    <main className="flex min-h-full w-screen flex-col bg-gray-50 sm:supports-[min-height:100dvh]:min-h-[100dvh] md:grid md:grid-cols-2 lg:grid-cols-[60%_40%]">
       <div className="relative hidden flex-1 flex-col justify-center px-5 pt-8 text-gray-700 dark:text-[#D292FF] md:flex md:px-6 md:py-[22px] lg:px-8">
         {/* top nav */}
         <nav className="left-0 top-8 flex w-full px-6 sm:absolute md:top-[22px] md:px-6 lg:px-8">
