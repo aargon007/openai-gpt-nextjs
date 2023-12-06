@@ -1,5 +1,7 @@
 import Typewriter from '@/utils/Typewriter'
 import Image from 'next/image'
+import { RedirectToSignIn, SignIn, UserButton } from "@clerk/nextjs";
+import Link from 'next/link';
 
 const Home = () => {
   const features = [
@@ -39,6 +41,7 @@ const Home = () => {
             </div>
           </h1>
         </nav>
+
         {/* typing feature  */}
         <div
           className="flex flex-col text-[32px] leading-[1.2] md:text-[40px]"
@@ -59,6 +62,7 @@ const Home = () => {
             </div>
           </h1>
         </nav>
+
         {/* right side nav  */}
         <div className="relative flex w-full grow flex-col items-center justify-center">
           <h2 className="text-center text-[20px] leading-[1.2] md:text-[32px] md:leading-8">
@@ -68,19 +72,17 @@ const Home = () => {
           <div className="mt-5 w-full max-w-[440px]">
             <div className="grid gap-x-3 gap-y-2 sm:grid-cols-2 sm:gap-y-0">
               {/* login  */}
-              <button
+              <Link href="/sign-in"
                 className="relative flex h-12 items-center justify-center rounded-md text-center text-base font-medium bg-[#3C46FF] text-[#fff] hover:bg-[#0000FF]"
-                data-testid="login-button"
-              >
-                <div className="relative -top-[1px]">Log in</div>
-              </button>
+              > Sign In</Link>
               {/* register */}
-              <button className="relative flex h-12 items-center justify-center rounded-md text-center text-base font-medium bg-[#3C46FF] text-[#fff] hover:bg-[#0000FF]">
-                <div className="relative -top-[1px]">Sign up</div>
-              </button>
+              <Link href="/sign-up" className="relative flex h-12 items-center justify-center rounded-md text-center text-base font-medium bg-[#3C46FF] text-[#fff] hover:bg-[#0000FF]">
+                Sign up</Link>
+
             </div>
           </div>
         </div>
+
         {/* privacy policy */}
         <div className="mt-10 flex flex-col justify-center ">
           <div className="flex justify-center text-[#cdcdcd] md:mb-3">
