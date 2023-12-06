@@ -1,9 +1,14 @@
 import Typewriter from '@/utils/Typewriter'
-import Image from 'next/image'
-import { RedirectToSignIn, SignIn, UserButton } from "@clerk/nextjs";
 import Link from 'next/link';
+import { auth } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
 const Home = () => {
+  const { userId } = auth();
+
+  if (userId) {
+    redirect("/chat");
+  }
   const features = [
     {
       id: 1,
@@ -30,7 +35,7 @@ const Home = () => {
 
   return (
     <main className="flex min-h-full w-screen flex-col bg-gray-50 sm:supports-[min-height:100dvh]:min-h-[100dvh] md:grid md:grid-cols-2 lg:grid-cols-[60%_40%]">
-      <div className="relative hidden flex-1 flex-col justify-center px-5 pt-8 text-gray-700 dark:text-[#D292FF] md:flex md:px-6 md:py-[22px] lg:px-8">
+      <div className="relative flex-1 flex-col justify-center px-5 pt-8 text-gray-700 dark:text-[#D292FF] md:flex md:px-6 md:py-[22px] lg:px-8">
         {/* top nav */}
         <nav className="left-0 top-8 flex w-full px-6 sm:absolute md:top-[22px] md:px-6 lg:px-8">
           <h1 aria-label="chat GPT by aargon">
@@ -44,7 +49,7 @@ const Home = () => {
 
         {/* typing feature  */}
         <div
-          className="flex flex-col text-[32px] leading-[1.2] md:text-[40px]"
+          className="min-h-[30vh] mt-5 md:mt-0 flex flex-col text-[32px] leading-[1.2] md:text-[40px]"
           aria-hidden="true"
         >
           <Typewriter features={features} />
@@ -53,7 +58,7 @@ const Home = () => {
 
       <div className="relative flex grow flex-col items-center justify-between bg-white px-5 py-8 text-black dark:bg-black dark:text-white sm:rounded-t-[30px] md:rounded-none md:px-6">
         {/* responsive */}
-        <nav className="flex w-full justify-start px-6 pb-8 md:hidden md:px-6 lg:px-8">
+        {/* <nav className="flex w-full justify-start px-6 pb-8 md:hidden md:px-6 lg:px-8">
           <h1 aria-label="ChatGPT by OpenAI">
             <div className="flex cursor-default items-center text-[20px] font-bold leading-none lg:text-[22px]">
               <div>
@@ -61,7 +66,7 @@ const Home = () => {
               </div>
             </div>
           </h1>
-        </nav>
+        </nav> */}
 
         {/* right side nav  */}
         <div className="relative flex w-full grow flex-col items-center justify-center">
@@ -78,7 +83,6 @@ const Home = () => {
               {/* register */}
               <Link href="/sign-up" className="relative flex h-12 items-center justify-center rounded-md text-center text-base font-medium bg-[#3C46FF] text-[#fff] hover:bg-[#0000FF]">
                 Sign up</Link>
-
             </div>
           </div>
         </div>
