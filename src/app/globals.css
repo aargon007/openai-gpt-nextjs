@@ -2,6 +2,231 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+	.scrollbar::-webkit-scrollbar {
+		width: 2px;
+		background: transparent;
+	}
+
+	.scrollbar::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	.scrollbar::-webkit-scrollbar-thumb {
+		background: #aaa;
+	}
+
+	.scrollbar::-webkit-scrollbar-thumb:hover {
+		background: #343a40;
+	}
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0 1000px #fff inset !important;
+	-webkit-text-fill-color: #212529 !important;
+}
+
+/* -------------- NavBar styles ---------------------- */
+.nav-header {
+	position: relative;
+}
+
+.nav-menu:before {
+	content: "";
+	display: inline-block;
+	width: 30px;
+	height: 2px;
+	top: 7px;
+	right: 0;
+	position: absolute;
+	border-radius: 1px;
+	background: #1b1d21;
+	transition: all 0.25s;
+}
+
+.nav-header .nav-menu.active:before {
+	transform: translateY(8px) rotate(45deg);
+}
+
+.nav-header .nav-menu.active:after {
+	transform: translateY(-8px) rotate(-45deg);
+	top: 22px;
+	width: 30px;
+}
+
+.nav-header .nav-menu:after {
+	content: "";
+	display: inline-block;
+	width: 22px;
+	height: 2px;
+	top: 18px;
+	right: 0;
+	position: absolute;
+	border-radius: 1px;
+	background: #1b1d21;
+	-webkit-transition: all 0.25s;
+	-o-transition: all 0.25s;
+	transition: all 0.25s;
+}
+
+/* --------  Navigation ---------- */
+.navigation {
+	position: fixed;
+	top: 0;
+	-ms-flex-negative: 0;
+	flex-shrink: 0;
+	width: 280px;
+	height: 100vh;
+	overflow: hidden;
+	overflow-y: scroll;
+	/* background: transparent; */
+	-webkit-transition: width 0.25s;
+	-o-transition: width 0.25s;
+	transition: width 0.25s;
+	/* padding-top: calc(90px + 6px); */
+}
+.navigation.menu-active {
+	width: 280px;
+}
+
+@media (max-width: 991.98px) {
+	.navigation {
+		position: fixed;
+		top: 0;
+		left: -320px;
+		background-color: #fff !important;
+		z-index: 1000;
+		height: 100vh;
+		padding-top: 0;
+		transition: all 0.4s ease;
+		box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.18) !important;
+	}
+	.navigation.menu-active {
+		left: 0;
+		right: 0;
+	}
+}
+
+.navigation.menu-active .nav-content {
+	width: 90px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.navigation .nav-content {
+	width: 280px;
+	transition: all 0.2s ease;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+@media (max-width: 767.98px) {
+	.navigation .nav-content {
+		width: auto;
+	}
+	.navigation .nav-content .nav-wrap {
+		box-shadow: none !important;
+	}
+}
+@media (min-width: 992px) {
+	.navigation .nav-content {
+		-webkit-border-radius: 0 10px 10px 0;
+		-moz-border-radius: 0 10px 10px 0;
+		border-radius: 0 10px 10px 0;
+	}
+}
+
+/* ---------------------main content-------------------  */
+@media (max-width: 1600px) {
+	.main-content {
+		padding-right: 0;
+	}
+}
+.main-content:not(.right-chat-active) {
+	padding-right: 0;
+}
+.main-content.menu-active {
+	padding-left: 90px;
+}
+.main-content.menu-active .middle-sidebar-header.sticky-header {
+	left: 90px;
+}
+@media (max-width: 767.98px) {
+	.main-content {
+		order: 1;
+		position: relative;
+		height: calc(100vh - 56px);
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+}
+
+@media (min-width: 992px) {
+	.main-content {
+		-webkit-box-flex: 1;
+		-ms-flex-positive: 1;
+		flex-grow: 1;
+		/* padding-top: 90px; */
+		padding-left: 280px;
+		/* padding-right: 290px; */
+		-webkit-transition: all 0.25s;
+		-o-transition: all 0.25s;
+		transition: all 0.25s;
+	}
+}
+
+/* ---------------- middle sidebar bottom ----------------- */
+.main-content .middle-sidebar-bottom {
+	width: 100%;
+	padding: 20px 0px 10px 0px;
+}
+@media (min-width: 1200px) {
+	.main-content .middle-sidebar-bottom {
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -moz-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-flex: 1;
+		-webkit-flex: 1;
+		-moz-box-flex: 1;
+		-ms-flex: 1;
+		flex: 1;
+	}
+}
+@media (max-width: 991.98px) {
+	.main-content .middle-sidebar-bottom {
+		width: 100%;
+		padding: 76px 15px 0;
+	}
+}
+
+/* ------------- middle sidebar left ----------- */
+.main-content .middle-sidebar-bottom .middle-sidebar-left {
+	width: 100%;
+}
+
+@media (min-width: 1400px) {
+	.middle-sidebar-left {
+		padding-right: 0;
+		margin-right: auto;
+		margin-left: auto;
+		max-width: 990px;
+	}
+}
+@media (min-width: 1200px) {
+	.middle-sidebar-left {
+		padding-right: 0;
+		margin-right: auto;
+		margin-left: auto;
+		max-width: 990px;
+	}
+}
+@media (max-width: 1600px) {
+	.main-content .middle-sidebar-bottom .middle-sidebar-left {
+		width: 100%;
+	}
+}
 
 /* typewriter circle css  */
 .typewriter-container .description .font-circle {

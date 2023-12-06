@@ -1,8 +1,10 @@
-import React from 'react';
+import Link from "next/link";
+
 
 const Sidebar = () => {
+
     return (
-        <div>
+        <div className={`scrollbar navigation bg-[rgba(0,0,0)]`}>
             
         </div>
     );
