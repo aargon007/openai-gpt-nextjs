@@ -39,7 +39,7 @@ const Typewriter: React.FC<TypewriterProps> = ({ features }) => {
 
 
     return (
-        <div className="typewriter-container absolute left-0 top-1/2 flex w-full flex-col px-5 transition-[transform,opacity] duration-500 md:pl-6 md:pr-8 lg:pl-8 lg:pr-10 opacity-100 translate-y-[calc(-50%-1em)]">
+        <div className="typewriter-container flex w-full flex-col transition-[transform,opacity] duration-500  translate-y-[calc(-50%-1em)]">
             <div className="relative font-bold">
                 {features[currentIndex]?.title}
             </div>
