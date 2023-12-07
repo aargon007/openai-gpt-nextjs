@@ -92,10 +92,10 @@ const page = () => {
                 </div>
                 {/* suggested chat container */}
                 <div className="w-full pt-2 md:pt-0 dark:border-white/20 md:border-transparent md:dark:border-transparent md:w-[calc(100%-.5rem)]">
-                    <form className="stretch mx-2 flex flex-row gap-3 last:mb-2 md:mx-4 md:last:mb-6 lg:mx-auto lg:max-w-2xl xl:max-w-3xl">
+                    {/* <form className="stretch mx-2 flex flex-row gap-3 last:mb-2 md:mx-4 md:last:mb-6 lg:mx-auto lg:max-w-2xl xl:max-w-3xl"> */}
                         <div className="relative flex h-full flex-1 items-center justify-center md:flex-col">
                             {/* feture input  */}
-                            <div>
+                            <div className="w-full">
                                 <div className="h-full flex ml-1 md:w-full md:m-auto md:mb-4 gap-0 md:gap-2 justify-center">
                                     <div className="grow">
                                         <div className="mb-4 flex w-full grow gap-2 px-1 pb-1 sm:px-2 sm:pb-0 md:static md:mb-0 md:max-w-none">
@@ -144,39 +144,7 @@ const page = () => {
                                 </div>
                             </div>
                         </div>
-                    </form>
-                    {/* chat input area */}
-                    <div className="mb-5">
-                        <div className="overflow-hidden flex w-full h-full relative border items-center justify-center text-white p-2 rounded-2xl bg-[rgb(52,53,65)] border-[rgb(86,88,105)]">
-                            <textarea
-                                id="prompt-textarea"
-                                placeholder="Message aargonGPT…"
-                                className="h-full w-full pt-5 pl-3 pr-10 overflow-hidden outline-none resize-none border-0 bg-transparent focus:ring-0 focus-visible:ring-0 placeholder-white/50 "
-                            ></textarea>
-                            <button
-                                className="absolute right-2 top-[30%] text-white p-0.5 border rounded-lg transition-colors"
-                                data-testid="send-button"
-                            >
-                                <span className="">
-                                    <svg
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        className="text-white"
-                                    >
-                                        <path
-                                            d="M7 11L12 6L17 11M12 18V7"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        ></path>
-                                    </svg>
-                                </span>
-                            </button>
-                        </div>
-                    </div>
+                    {/* </form> */}
                     {/* <div className="relative px-2 py-2 text-center text-xs text-gray-600 dark:text-gray-300 md:px-[60px]">
                         <span>
                             ChatGPT can make mistakes. Consider checking important information.

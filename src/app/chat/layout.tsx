@@ -3,6 +3,7 @@ import TopNav from "@/components/Nav/TopNav";
 import type { Metadata } from 'next'
 import { auth, clerkClient } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+import ChatBox from "@/components/Chat/ChatBox";
 
 export const metadata: Metadata = {
     title: 'chat with aargonGPT using openAI model',
@@ -29,10 +30,12 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
                     className="middle-sidebar-bottom"
                     style={{ padding: "56px 15px 0" }}
                 >
-                    <div className="middle-sidebar-left min-h-[calc(100vh-60px)]">
+                    <div className="middle-sidebar-left min-h-[calc(100vh-165px)]">
                         {children}
                     </div>
                 </div>
+                {/* message container */}
+                <ChatBox/>
             </div>
         </div>
     );
