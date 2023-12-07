@@ -1,14 +1,19 @@
+'use client'
+import { StateContext } from "@/utils/StateManager";
 import Link from "next/link";
+import { useContext } from "react";
+import UserProfile from "./UserProfile";
 
 
 const Sidebar = () => {
-
+    const { openMenu, setOpenMenu } = useContext(StateContext);
+    
     return (
-        <div className={`scrollbar navigation bg-[rgba(0,0,0)]`}>
+        <div className={`scrollbar navigation  ${openMenu ? "menu-active" : ""} bg-[rgba(0,0,0)]`}>
             <div className="px-0 container">
                 <div className="w-[280px] transition-all px-[15px] rounded-tr-[10px] rounded-br-[10px]">
                     {/* main sidebar content */}
-                    <div className="flex-col flex-1 transition-opacity duration-500 -mr-2 pr-2 overflow-y-auto">
+                    <div className="flex-col flex-1 transition-opacity duration-500 -mr-2 pr-2 overflow-y-auto min-h-[calc(100vh-80px)]">
                         {/* new chat  */}
                         <div className="pt-3.5">
                             <div
@@ -89,31 +94,9 @@ const Sidebar = () => {
                                         </ol>
                                     </div>
                                     {/* yesterday */}
-                                    <div
-                                        className="relative mt-5 h-auto"
-                                    >
-                                        <div>
-                                            <h3 className="h-9 pb-2 pt-3 px-2 text-xs font-medium text-ellipsis overflow-hidden break-all text-gray-600">
-                                                Yesterday
-                                            </h3>
-                                        </div>
-                                        <ol>
-
-                                        </ol>
-                                    </div>
+                                    
                                     {/* previous 7 days */}
-                                    <div
-                                        className="relative mt-5 h-auto"
-                                    >
-                                        <div>
-                                            <h3 className="h-9 pb-2 pt-3 px-2 text-xs font-medium text-ellipsis overflow-hidden break-all text-gray-600">
-                                                Previous 7 Days
-                                            </h3>
-                                        </div>
-                                        <ol>
-
-                                        </ol>
-                                    </div>
+                                    
 
                                 </span>
                                 {/* monthly content */}
@@ -137,32 +120,11 @@ const Sidebar = () => {
                     </div>
 
                     {/* profile */}
-                    <div className="flex flex-col pt-2 dark:border-white/20">
+                    <div className="flex flex-col pt-2 border-t border-white/20">
                         <div className="flex w-full items-center">
                             <div className="grow">
                                 <div className="group relative" data-headlessui-state="">
-                                    <button
-                                        className="flex w-full items-center gap-2 rounded-lg p-2 text-sm hover:bg-[#202123]"
-                                    >
-                                        <div className="flex-shrink-0">
-                                            <div className="flex items-center bg-purple-500 p-1 justify-center overflow-hidden rounded-full">
-                                                <div className="relative flex text-white text-[12px]">
-                                                    {/* <img
-                                                    alt="User"
-                                                    loading="lazy"
-                                                    width="32"
-                                                    height="32"
-                                                    className="rounded-sm"
-                                                    style="color: transparent;"
-                                                    src=""
-                                                /> */}MU
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="relative -top-px grow -space-y-px overflow-hidden text-ellipsis whitespace-nowrap text-left text-white">
-                                            <div className="font-semibold">Md Muhaiminul</div>
-                                        </div>
-                                    </button>
+                                    <UserProfile/>
                                 </div>
                             </div>
                         </div>

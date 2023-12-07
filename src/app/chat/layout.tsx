@@ -4,7 +4,8 @@ import type { Metadata } from 'next'
 import { auth, clerkClient } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import ChatBox from "@/components/Chat/ChatBox";
-import StateManager from "@/utils/StateManager";
+import { StateManager } from "@/utils/StateManager";
+
 
 export const metadata: Metadata = {
     title: 'chat with aargonGPT using openAI model',
