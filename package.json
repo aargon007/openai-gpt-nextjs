@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apideck/components": "^0.12.16",
     "@clerk/nextjs": "^4.27.4",
     "@headlessui/react": "^1.7.17",
     "mongoose": "^8.0.3",
