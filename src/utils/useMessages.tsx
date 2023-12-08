@@ -1,7 +1,8 @@
+'use client'
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import { useToast } from '@apideck/components';
 import { sendMessage } from './sendMessage'; // Assuming this function sends messages
 import { CreateChatCompletionRequestMessage } from 'openai/resources/chat/index.mjs';
+import { useToast } from '@apideck/components';
 
 interface ChatCompletionRequestMessage {
     role: 'user' | 'assistant' | 'system';
@@ -54,7 +55,7 @@ export function MessagesProvider({ children }: { children: ReactNode }) {
             const reply = data.choices[0].message;
             setMessages([...newMessages, reply]);
         } catch (error) {
-            addToast({ title: 'An error occurred', type: 'error' });
+            // addToast({ title: 'An error occurred', type: 'error' });
         } finally {
             setIsLoadingAnswer(false);
         }
@@ -73,6 +74,6 @@ export function MessagesProvider({ children }: { children: ReactNode }) {
     )
 }
 
-// export const useMessages = () => {
-//     return useContext(ChatsContext) as ContextProps;
-// };
+export const useMessages = () => {
+    return useContext(ChatsContext) as ContextProps;
+};

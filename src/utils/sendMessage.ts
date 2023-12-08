@@ -1,9 +1,9 @@
 // import { CreateChatCompletionRequestMessage } from "openai/resources/chat"
-import { CreateChatCompletionRequestMessage } from "openai/resources/chat/index.mjs"
+import { CreateChatCompletionRequestMessage } from "openai";
 
 export const sendMessage = async (messages: CreateChatCompletionRequestMessage[]) => {
     try {
-        const response = await fetch('/api/createMessage', {
+        const response = await fetch('/api/chats', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -11,7 +11,10 @@ export const sendMessage = async (messages: CreateChatCompletionRequestMessage[]
             body: JSON.stringify({ messages }),
         })
 
-        return await response.json()
+        const res = await response.json();
+        console.log(res);
+        return res
+        
     } catch (error) {
         console.log(error)
     }

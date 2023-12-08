@@ -1,11 +1,14 @@
 import { NextResponse } from "next/server";
+import { NextApiRequest, NextApiResponse } from 'next'
 import dbConnect from '@/services/dbConnect'
-
+import { OpenAIStream, StreamingTextResponse } from 'ai'
 import OpenAI from 'openai';
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
+
+export const runtime = 'edge'
 
 async function main() {
     const stream = await openai.chat.completions.create({
@@ -32,3 +35,16 @@ export const GET = async () => {
         );
     }
 };
+ 
+export async function POST(req: Request) {
+  const { messages } = await req.json()
+  const response = await openai.chat.completions.create({
+    model: 'gpt-4',
+    stream: true,
+    messages,
+  })
+ 
+  const stream = OpenAIStream(response)
+ 
+  return new StreamingTextResponse(stream)
+}
