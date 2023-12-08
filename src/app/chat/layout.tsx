@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const layout = async ({ children }: { children: React.ReactNode }) => {
     const { userId,getToken } = auth();
     // const { getToken, isLoaded, isSignedIn } = useAuth();
- console.log(userId);
+
     if (!userId) {
         redirect("/");
     }
