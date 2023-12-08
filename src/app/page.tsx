@@ -1,6 +1,6 @@
 import Typewriter from '@/utils/Typewriter'
 import Link from 'next/link';
-import { auth } from "@clerk/nextjs";
+import { SignInButton, SignUpButton, auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
 const Home = () => {
@@ -77,12 +77,23 @@ const Home = () => {
           <div className="mt-5 w-full max-w-[440px]">
             <div className="grid gap-x-3 gap-y-2 sm:grid-cols-2 sm:gap-y-0">
               {/* login  */}
-              <Link href="/sign-in"
+              <SignInButton mode='modal'>
+                <button
+                  className="relative flex h-12 items-center justify-center rounded-md text-center text-base font-medium bg-[#3C46FF] text-[#fff] hover:bg-[#0000FF]"
+                > Sign In</button>
+              </SignInButton>
+              {/* <Link href="/sign-in"
                 className="relative flex h-12 items-center justify-center rounded-md text-center text-base font-medium bg-[#3C46FF] text-[#fff] hover:bg-[#0000FF]"
-              > Sign In</Link>
+              > Sign In</Link> */}
               {/* register */}
-              <Link href="/sign-up" className="relative flex h-12 items-center justify-center rounded-md text-center text-base font-medium bg-[#3C46FF] text-[#fff] hover:bg-[#0000FF]">
-                Sign up</Link>
+              <SignUpButton mode='modal'>
+                <button
+                  className="relative flex h-12 items-center justify-center rounded-md text-center text-base font-medium bg-[#3C46FF] text-[#fff] hover:bg-[#0000FF]"
+                > Sign Up</button>
+              </SignUpButton>
+              {/* <Link href="/sign-up" className="relative flex h-12 items-center justify-center rounded-md text-center text-base font-medium bg-[#3C46FF] text-[#fff] hover:bg-[#0000FF]">
+                Sign up
+              </Link> */}
             </div>
           </div>
         </div>

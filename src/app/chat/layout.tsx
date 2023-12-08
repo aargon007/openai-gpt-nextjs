@@ -1,7 +1,7 @@
 import Sidebar from "@/components/Nav/Sidebar";
 import TopNav from "@/components/Nav/TopNav";
 import type { Metadata } from 'next'
-import { auth, clerkClient } from "@clerk/nextjs";
+import { auth, clerkClient, useAuth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import ChatBox from "@/components/Chat/ChatBox";
 import { StateManager } from "@/utils/StateManager";
@@ -13,12 +13,14 @@ export const metadata: Metadata = {
 }
 
 const layout = async ({ children }: { children: React.ReactNode }) => {
-    const { userId } = auth();
-
+    const { userId,getToken } = auth();
+    // const { getToken, isLoaded, isSignedIn } = useAuth();
+ console.log(userId);
     if (!userId) {
         redirect("/");
     }
-
+   
+    
     // const user = await clerkClient.users.getUser(userId);
     return (
         <StateManager>

@@ -1,7 +1,11 @@
 import { Popover } from "@headlessui/react";
+import { useClerk } from "@clerk/nextjs";
+import { redirect, useRouter } from "next/navigation";
 
 const UserProfile = () => {
-    
+    const { signOut } = useClerk();
+    const router = useRouter()
+
     return (
         <Popover className="relative outline-none">
             <Popover.Button
@@ -45,10 +49,10 @@ const UserProfile = () => {
                             Settings
                         </div>
                         <div className="h-px bg-white/10" role="none"></div>
-                        <button className="flex px-3 min-h-[44px] py-1 items-center gap-3 text-white cursor-pointer text-sm hover:bg-[#343541] w-full outline-none">
+                        <button onClick={() => { signOut(); router.push("/") }} className="flex px-3 min-h-[44px] py-1 items-center gap-3 text-white cursor-pointer text-sm hover:bg-[#343541] w-full outline-none">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-[18px] w-[18px]">
-                                <path d="M11 3H7C5.89543 3 5 3.89543 5 5V19C5 20.1046 5.89543 21 7 21H11" stroke="currentColor" strokeWidth="2" stroke-linecap="round"></path>
-                                <path d="M20 12H11M20 12L16 16M20 12L16 8" stroke="currentColor" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M11 3H7C5.89543 3 5 3.89543 5 5V19C5 20.1046 5.89543 21 7 21H11" stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
+                                <path d="M20 12H11M20 12L16 16M20 12L16 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
                             </svg>
                             Log out
                         </button>

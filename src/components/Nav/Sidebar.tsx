@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useContext } from "react";
 import UserProfile from "./UserProfile";
 
-
 const Sidebar = () => {
     const { openMenu, setOpenMenu } = useContext(StateContext);
 
