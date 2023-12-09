@@ -1,6 +1,6 @@
 'use client'
 import React, { createContext, useState, ReactNode, useContext } from 'react';
-import { useChat,Message } from 'ai/react';
+import { useChat, Message } from 'ai/react';
 
 // Define a type for your state data
 type StateType = {
@@ -11,16 +11,24 @@ type StateType = {
     input: string;
     handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+    reload: () => Promise<string | null | undefined>;
+    stop: () => void;
+    isLoading: boolean;
+    setMessages:(messages: Message[]) => void
 };
 
 const initialContext: StateType = {
     openMenu: false,
-    setOpenMenu: () => {},
-    setInput:() => {},
+    setOpenMenu: () => { },
+    setInput: () => { },
     messages: [],
     input: '',
-    handleInputChange: () => {},
-    handleSubmit: () => {},
+    handleInputChange: () => { },
+    handleSubmit: () => { },
+    reload: async () => { return 'Reloaded' },
+    stop: () => { },
+    isLoading: false,
+    setMessages: ()=> {}
 };
 
 export const StateContext = createContext<StateType>(initialContext);
@@ -31,10 +39,10 @@ type Props = {
 
 export const StateManager = ({ children }: Props) => {
     const [openMenu, setOpenMenu] = useState<boolean>(false);
-    const { messages, input, handleInputChange, handleSubmit,setInput } = useChat();
+    const { messages, input, handleInputChange, handleSubmit, setInput, stop, reload, isLoading, setMessages } = useChat();
+    console.log(messages);
 
-
-    const stateData:StateType = {
+    const stateData: StateType = {
         openMenu,
         setOpenMenu,
         setInput,
@@ -42,6 +50,10 @@ export const StateManager = ({ children }: Props) => {
         input,
         handleInputChange,
         handleSubmit,
+        stop,
+        reload,
+        isLoading,
+        setMessages
     };
 
     return (

@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
  
 export default authMiddleware({
   afterAuth(auth, req, evt) {
-    console.log(auth);
+    // console.log(auth);
 
     // Handle users who aren't authenticated
     if (!auth.userId && !auth.isPublicRoute) {

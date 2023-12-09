@@ -1,10 +1,14 @@
 'use client'
 import { StateContext } from "@/utils/StateManager";
+import { usePathname, useRouter } from "next/navigation";
 import { useContext } from "react";
 
 const ChatBox = () => {
-    const { handleSubmit, input, setInput } = useContext(StateContext);
-    
+    const { handleSubmit, input, setInput,stop, reload, isLoading } = useContext(StateContext);
+    const pathname = usePathname();
+    const router = useRouter();
+console.log(isLoading);
+
     const handleInputChange: React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
         setInput(event.target.value);
     };
@@ -19,7 +23,12 @@ const ChatBox = () => {
                 const formEvent = new Event('submit', { bubbles: true, cancelable: true });
                 form.dispatchEvent(formEvent);
             }
+            //
+            // if (pathname == "/chat") {                
+            //     router.push("/chat/1")
+            // }
         }
+
     };
 
     return (

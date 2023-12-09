@@ -3,9 +3,11 @@ import { StateContext } from "@/utils/StateManager";
 import Link from "next/link";
 import { useContext } from "react";
 import UserProfile from "./UserProfile";
+import { useRouter } from "next/navigation";
 
 const Sidebar = () => {
-    const { openMenu, setOpenMenu } = useContext(StateContext);
+    const { openMenu, setOpenMenu, setMessages } = useContext(StateContext);
+    const router = useRouter()
 
     return (
         <div className={`scrollbar navigation  ${openMenu ? "menu-active" : ""} bg-[rgba(0,0,0)]`}>
@@ -18,9 +20,13 @@ const Sidebar = () => {
                             <div
                                 className="pb-0.5 last:pb-0 transform-none"
                             >
-                                <Link
-                                    className="group flex h-10 items-center gap-2 rounded-lg px-2 font-medium hover:bg-[#202123] transition-all"
-                                    href="/chat/1"
+                                <div
+                                    className="group flex cursor-pointer h-10 items-center gap-2 rounded-lg px-2 font-medium hover:bg-[#202123] transition-all"
+                                    onClick={()=> {
+                                        router.push("/chat");
+                                        setMessages([])
+                                        setOpenMenu(false);
+                                    }}
                                 >
                                     <div className="h-7 w-7 flex-shrink-0">
                                         <div className="relative flex h-full items-center justify-center rounded-full bg-gray-50 text-black">
@@ -51,7 +57,7 @@ const Sidebar = () => {
                                             </button>
                                         </span>
                                     </div>
-                                </Link>
+                                </div>
                             </div>
                         </div>
                         {/* all chat */}
