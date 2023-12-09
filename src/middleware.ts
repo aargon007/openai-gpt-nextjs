@@ -1,20 +1,32 @@
-import { authMiddleware } from "@clerk/nextjs";
-
-// This example protects all routes including api/trpc routes
-// Please edit this to allow other routes to be public as needed.
-// See https://clerk.com/docs/nextjs/middleware for more information about configuring your middleware
-// export default authMiddleware({});
-// export default authMiddleware({
-//   publicRoutes: ['/',"/api/*"],
-// })
-
-// export const config = {
-//   matcher: ["/login"],
-// };
+import { authMiddleware, redirectToSignIn } from '@clerk/nextjs';
+import { NextResponse } from 'next/server';
+// import createMiddleware from "next-intl/middleware";
+ 
 export default authMiddleware({
-  publicRoutes: ['/'],
+  afterAuth(auth, req, evt) {
+    console.log(auth);
+
+    // Handle users who aren't authenticated
+    if (!auth.userId && !auth.isPublicRoute) {
+      // return redirectToSignIn({ returnBackUrl: req.url });
+      return NextResponse.redirect(new URL('/sign-in', req.url))
+    }
+    // Redirect logged in users to organization selection page if they are not active in an organization
+    // if(auth.userId && req.nextUrl.pathname !== "/org-selection"){
+    //   const orgSelection = new URL('/org-selection', req.url)
+    //   return NextResponse.redirect(orgSelection)
+    // }
+    // If the user is logged in and trying to access a protected route, allow them to access route
+    if (auth.userId && !auth.isPublicRoute) {
+      return NextResponse.next()
+    }
+    // Allow users visiting public routes to access them
+    return NextResponse.next();
+  },
+  publicRoutes: ["/", "/api"],
+  // debug: true
 })
 
 export const config = {
-  matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
+  matcher: ["/", "/chat", "/chat/:path*"],
 };

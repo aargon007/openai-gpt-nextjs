@@ -20,7 +20,7 @@ const Sidebar = () => {
                             >
                                 <Link
                                     className="group flex h-10 items-center gap-2 rounded-lg px-2 font-medium hover:bg-[#202123] transition-all"
-                                    href="/chat"
+                                    href="/chat/1"
                                 >
                                     <div className="h-7 w-7 flex-shrink-0">
                                         <div className="relative flex h-full items-center justify-center rounded-full bg-gray-50 text-black">

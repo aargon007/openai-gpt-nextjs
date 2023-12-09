@@ -1,5 +1,5 @@
 // import { CreateChatCompletionRequestMessage } from "openai/resources/chat"
-import { CreateChatCompletionRequestMessage } from "openai";
+import CreateChatCompletionRequestMessage from "openai";
 
 export const sendMessage = async (messages: CreateChatCompletionRequestMessage[]) => {
     try {

@@ -35,16 +35,16 @@ export const GET = async () => {
         );
     }
 };
- 
+
 export async function POST(req: Request) {
-  const { messages } = await req.json()
-  const response = await openai.chat.completions.create({
-    model: 'gpt-4',
-    stream: true,
-    messages,
-  })
- 
-  const stream = OpenAIStream(response)
- 
-  return new StreamingTextResponse(stream)
+    const { messages } = await req.json()
+    const response = await openai.chat.completions.create({
+        model: 'gpt-4',
+        stream: true,
+        messages,
+    })
+
+    const stream = OpenAIStream(response)
+
+    return new StreamingTextResponse(stream)
 }

@@ -4,6 +4,7 @@ import { useContext } from "react";
 
 const ChatBox = () => {
     const { handleSubmit, input, setInput } = useContext(StateContext);
+    
     const handleInputChange: React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
         setInput(event.target.value);
     };

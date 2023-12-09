@@ -1,11 +1,11 @@
 import Sidebar from "@/components/Nav/Sidebar";
 import TopNav from "@/components/Nav/TopNav";
 import type { Metadata } from 'next'
-import { auth, clerkClient, useAuth } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
+import { auth, clerkClient, useUser } from "@clerk/nextjs";
+import { redirect, useRouter } from "next/navigation";
 import ChatBox from "@/components/Chat/ChatBox";
 import { StateManager } from "@/utils/StateManager";
-
+import Spinner from "@/components/Loader/Spinner";
 
 export const metadata: Metadata = {
     title: 'chat with aargonGPT using openAI model',
@@ -14,13 +14,9 @@ export const metadata: Metadata = {
 
 const layout = async ({ children }: { children: React.ReactNode }) => {
     const { userId,getToken } = auth();
-    // const { getToken, isLoaded, isSignedIn } = useAuth();
-
-    if (!userId) {
-        redirect("/");
+    if(userId){
+        <Spinner/>
     }
-   
-    
     // const user = await clerkClient.users.getUser(userId);
     return (
         <StateManager>

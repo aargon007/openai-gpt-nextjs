@@ -6,7 +6,7 @@ const ChatContainer = () => {
     const { messages } = useContext(StateContext);
 
     return (
-        <div className="w-full">
+        <div className="w-full pb-[150px]">
             {messages.map(m => (
                 <div key={m.id} className="w-full">
                     <div className="flex flex-1 text-base mx-auto gap-3 md:px-5 lg:px-1 xl:px-5 md:max-w-3xl lg:max-w-[40rem] xl:max-w-[48rem] } group">
