@@ -1,34 +1,43 @@
 import mongoose, { Schema } from 'mongoose';
 
-export interface Chats extends mongoose.Document {
-    userID: string;
-    chats: [
-        {
-            userMessage: string;
-            answers: any;
-        }
-    ]
+export interface Chat extends mongoose.Document {
+    userId: string;
+    messages: Array<{
+        content: string;
+        role: 'user' | 'assistant';
+        createdAt?: Date;
+        id: string;
+    }>;
 }
 
 const ChatsSchema = new mongoose.Schema({
-    userID: {
+    userId: {
         type: String,
         required: true,
     },
-    chats: [
+    messages: [
         {
-            userMessage: {
+            content: {
                 type: String,
                 required: true,
             },
-            answers: {
-                type: Schema.Types.Mixed, // Use appropriate type for 'answers'
+            role: {
+                type: String,
                 required: true,
+                enum: ['user', 'assistant'], // Ensure only 'user' or 'assistant' are allowed
+            },
+            createdAt: {
+                type: Date,
+            },
+            id: {
+                type: String,
+                required: true,
+                // unique: true,
             },
         },
     ],
 });
 
-const ChatModel = mongoose.model<Chats>('Chat', ChatsSchema);
+const ChatModel = mongoose.models.Chat || mongoose.model<Chat>('Chat', ChatsSchema);
 
 export default ChatModel;

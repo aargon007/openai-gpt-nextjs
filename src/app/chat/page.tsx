@@ -7,6 +7,8 @@ import { useContext } from "react";
 const Page = () => {
     const { handleSubmit, input, setInput, messages } = useContext(StateContext);
     const router = useRouter();
+    console.log(messages);
+    
 
     const featuresInput = [
         {

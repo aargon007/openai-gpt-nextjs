@@ -1,13 +1,15 @@
 'use client'
 import { StateContext } from "@/utils/StateManager";
+import { useAuth } from "@clerk/nextjs";
+import axios from "axios";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext } from "react";
 
 const ChatBox = () => {
-    const { handleSubmit, input, setInput,stop, reload, isLoading } = useContext(StateContext);
+    const { handleSubmit, input, setInput, stop, reload, isLoading, messages } = useContext(StateContext);
     const pathname = usePathname();
     const router = useRouter();
-console.log(isLoading);
+    const { userId } = useAuth()
 
     const handleInputChange: React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
         setInput(event.target.value);
@@ -27,6 +29,16 @@ console.log(isLoading);
             // if (pathname == "/chat") {                
             //     router.push("/chat/1")
             // }
+            // axios.post('http://localhost:3000/api/user', {
+            //     messages,
+            //     userId
+            //   })
+            //   .then(function (response) {
+            //     console.log(response);
+            //   })
+            //   .catch(function (error) {
+            //     console.log(error);
+            //   });
         }
 
     };
