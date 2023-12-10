@@ -1,6 +1,7 @@
 'use client'
 import { StateContext } from "@/utils/StateManager";
 import { useContext } from "react";
+import MarkdownPreview from "../CodePreview/MarkdownPreview";
 
 const ChatContainer = () => {
     const { messages } = useContext(StateContext);
@@ -61,8 +62,8 @@ const ChatContainer = () => {
                             <div className="font-semibold select-none text-[#ececf1]">{m.role == "user" ? "You" : "chatGPT"}</div>
                             <div className="flex-col gap-1 md:gap-3">
                                 <div className="flex flex-grow flex-col max-w-full">
-                                    <div className="min-h-[20px] text-[#ececf1] flex flex-col items-start gap-3 whitespace-pre-wrap break-words [.text-message+&amp;]:mt-5 overflow-x-auto">
-                                        <div className="">{m.content}</div>
+                                    <div className="min-h-[20px] text-[#ececf1] flex flex-col items-start gap-3 whitespace-pre-wrap [.text-message+&amp;]:mt-5">
+                                            <MarkdownPreview markdownContent={m.content} />                                    
                                     </div>
                                 </div>
                                 {/* edit icon  */}
