@@ -9,7 +9,8 @@ const ChatBox = () => {
     const { handleSubmit, input, setInput, stop, reload, isLoading, messages } = useContext(StateContext);
     const pathname = usePathname();
     const router = useRouter();
-    const { userId } = useAuth()
+    console.log(pathname);
+    
 
     const handleInputChange: React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
         setInput(event.target.value);
@@ -26,21 +27,30 @@ const ChatBox = () => {
                 form.dispatchEvent(formEvent);
             }
             //
-            // if (pathname == "/chat") {                
-            //     router.push("/chat/1")
-            // }
-            // axios.post('http://localhost:3000/api/user', {
-            //     messages,
-            //     userId
-            //   })
-            //   .then(function (response) {
-            //     console.log(response);
-            //   })
-            //   .catch(function (error) {
-            //     console.log(error);
-            //   });
+            if (pathname == "/chat" && messages?.length !== 0 && isLoading === false) {
+                axios.post('/api/user', {
+                    messages
+                })
+                    .then(res => {
+                        console.log(res.data);
+                        router.push(`/chat/${res.data._id}`)
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
+            if (pathname !== "/chat" && messages?.length !== 0 && isLoading === false) {
+                axios.put(`/api/chat/${pathname}`, {
+                    messages
+                })
+                    .then(res => {
+                        console.log(res.data);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
         }
-
     };
 
     return (

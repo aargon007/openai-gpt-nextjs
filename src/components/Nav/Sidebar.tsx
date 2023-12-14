@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useContext } from "react";
 import UserProfile from "./UserProfile";
 import { useRouter } from "next/navigation";
+import { BsStars } from "react-icons/bs";
 
 const Sidebar = () => {
     const { openMenu, setOpenMenu, setMessages } = useContext(StateContext);
@@ -22,7 +23,7 @@ const Sidebar = () => {
                             >
                                 <div
                                     className="group flex cursor-pointer h-10 items-center gap-2 rounded-lg px-2 font-medium hover:bg-[#202123] transition-all"
-                                    onClick={()=> {
+                                    onClick={() => {
                                         router.push("/chat");
                                         setMessages([])
                                         setOpenMenu(false);
@@ -30,7 +31,15 @@ const Sidebar = () => {
                                 >
                                     <div className="h-7 w-7 flex-shrink-0">
                                         <div className="relative flex h-full items-center justify-center rounded-full bg-gray-50 text-black">
-                                            Ar
+                                            <svg className="w-full h-full block mt-[10px] ml-[6px]">
+                                                <defs>
+                                                    <linearGradient id="GradientColor" gradientTransform="rotate(90)">
+                                                        <stop offset="0%" stopColor="#ff4700" />
+                                                        <stop offset="100%" stopColor="#ff8c00" />
+                                                    </linearGradient>
+                                                </defs>
+                                                <BsStars fill="url('#GradientColor')" className="text-center" />
+                                            </svg>
                                         </div>
                                     </div>
                                     <div className="grow overflow-hidden text-ellipsis whitespace-nowrap text-sm text-gray-300">
