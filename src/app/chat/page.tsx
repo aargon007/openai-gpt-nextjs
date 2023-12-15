@@ -1,22 +1,11 @@
 'use client'
 import ChatContainer from "@/components/Chat/ChatContainer";
 import { StateContext } from "@/utils/StateManager";
-import axios from "axios";
-import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { BsStars } from "react-icons/bs";
 
 const Page = () => {
     const { handleSubmit, input, setInput, messages } = useContext(StateContext);
-
-    // axios.get('/api/user')
-    //     .then(res => {
-    //         console.log(res.data);
-    //     })
-    //     .catch(error => {
-    //         console.log(error);
-    //     });
-
 
     const featuresInput = [
         {

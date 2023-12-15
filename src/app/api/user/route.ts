@@ -9,7 +9,7 @@ export async function GET(req: Request) {
     await dbConnect()
 
     try {
-        const userChats = await ChatModel.find({ userId: user?.id })
+        const userChats = await ChatModel.find({ userId: user?.id }).sort({createdAt:-1})
         // Return the saved document in the response
         return NextResponse.json(userChats);
     } catch (error) {
@@ -24,7 +24,8 @@ export async function POST(req: Request) {
     // Create a new Chat document using the ChatModel
     const newChat = new ChatModel({
         userId: user?.id,
-        messages: body.messages
+        messages: body.messages,
+        createdAt : new Date()
     });
 
     // Save the new Chat document to the database

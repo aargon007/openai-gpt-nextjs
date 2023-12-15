@@ -3,12 +3,14 @@ import { StateContext } from "@/utils/StateManager";
 import Link from "next/link";
 import { useContext } from "react";
 import UserProfile from "./UserProfile";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { BsStars } from "react-icons/bs";
 
 const Sidebar = () => {
-    const { openMenu, setOpenMenu, setMessages } = useContext(StateContext);
-    const router = useRouter()
+    const { openMenu, setOpenMenu, setMessages, chatHistory,
+        isloadingChats } = useContext(StateContext);
+    const router = useRouter();
+    const params = useParams();
 
     return (
         <div className={`scrollbar navigation  ${openMenu ? "menu-active" : ""} bg-[rgba(0,0,0)]`}>
@@ -84,27 +86,35 @@ const Sidebar = () => {
                                         </div>
                                         <ol>
                                             {/* chat item  */}
-                                            <li
-                                                className="relative z-[15] h-auto overflow-hidden"
-                                            >
-                                                <div className="group relative text-[rgba(236,236,241,.9)]">
-                                                    <Link
-                                                        href="/chat/1"
-                                                        className="flex items-center gap-2 rounded-lg p-2 bg-[#202123]"
-                                                    >
-                                                        <div className="relative grow overflow-hidden whitespace-nowrap">
-                                                            Translation Integration with i18n
-                                                            <div className="absolute bottom-0 right-0 top-0 w-8 bg-gradient-to-l to-transparent from-[#202123]"></div>
-                                                        </div>
-                                                    </Link>
-                                                    <button className="absolute bottom-0 right-0 top-0 flex w-9 items-center justify-center rounded-lg text-[#8e8ea0] transition hover:text-[#c5c5d2]">
-                                                        <div className="pointer-events-none absolute bottom-0 right-0 top-0 w-14 rounded-lg bg-gradient-to-l from-[#202123] from-60% to-transparent"></div>
-                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 relative">
-                                                            <path fillRule="evenodd" clipRule="evenodd" d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z" fill="currentColor"></path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </li>
+                                            {chatHistory?.length !== 0 && chatHistory.map(chat =>
+                                                <li
+                                                    key={chat._id}
+                                                    className="relative z-[15] h-auto overflow-hidden mt-px"
+                                                >
+                                                    <div className="group relative text-[rgba(236,236,241,.9)]">
+                                                        <Link
+                                                            href={`/chat/${chat._id}`}
+                                                            onClick={() => {
+                                                                setMessages(chat.messages)
+                                                                setOpenMenu(false);
+                                                            }}
+                                                            className={`flex items-center gap-2 rounded-lg p-2 ${params.id == chat._id ? "bg-[#202123]" : ""} hover:bg-[#202123]`}
+                                                        >
+                                                            <div className="relative grow overflow-hidden whitespace-nowrap">
+                                                                {chat.messages[0].content.slice(0, 30)}
+                                                                <div className={`${params.id == chat._id ? "absolute" : ""} bottom-0 right-0 top-0 w-8 bg-gradient-to-l to-transparent from-[#202123]`}></div>
+                                                            </div>
+                                                        </Link>
+
+                                                        {params.id == chat._id && <button className="absolute bottom-0 right-0 top-0 flex w-9 items-center justify-center rounded-lg text-[#8e8ea0] transition hover:text-[#c5c5d2]">
+                                                            <div className="pointer-events-none absolute bottom-0 right-0 top-0 w-14 rounded-lg bg-gradient-to-l from-[#202123] from-60% to-transparent"></div>
+                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 relative">
+                                                                <path fillRule="evenodd" clipRule="evenodd" d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z" fill="currentColor"></path>
+                                                            </svg>
+                                                        </button>}
+                                                    </div>
+                                                </li>
+                                            )}
                                         </ol>
                                     </div>
                                     {/* yesterday */}
@@ -114,7 +124,7 @@ const Sidebar = () => {
 
                                 </span>
                                 {/* monthly content */}
-                                <span>
+                                {/* <span>
                                     <div
                                         className="relative mt-5 h-auto"
                                     >
@@ -128,7 +138,7 @@ const Sidebar = () => {
                                         </ol>
                                     </div>
                                 </span>
-                                <span></span>
+                                <span></span> */}
                             </div>
                         </div>
                     </div>

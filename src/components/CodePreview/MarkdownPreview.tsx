@@ -25,7 +25,7 @@ const MarkdownPreview: React.FC<MarkdownPreviewProps> = ({
     };
 
     return (
-        <div className="markdown w-full" style={{ wordWrap: "break-word" }}>
+        <div className="markdown w-full pr-10" style={{ wordWrap: "break-word" }}>
             <ReactMarkdown
                 remarkPlugins={[[remarkGfm, { singleTilde: true }]]}
                 rehypePlugins={[rehypeRaw]}

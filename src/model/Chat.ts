@@ -2,6 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 
 export interface Chat extends mongoose.Document {
     userId: string;
+    createdAt: Date;
     messages: Array<{
         content: string;
         role: 'user' | 'assistant';
@@ -14,6 +15,10 @@ const ChatsSchema = new mongoose.Schema({
     userId: {
         type: String,
         required: true,
+    },
+    createdAt: {
+        type: Date,
+        // default: Date.now, // Default value for createdAt field
     },
     messages: [
         {

@@ -1,6 +1,8 @@
 'use client'
 import React, { createContext, useState, ReactNode, useContext } from 'react';
 import { useChat, Message } from 'ai/react';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 // Define a type for your state data
 type StateType = {
@@ -14,7 +16,19 @@ type StateType = {
     reload: () => Promise<string | null | undefined>;
     stop: () => void;
     isLoading: boolean;
-    setMessages:(messages: Message[]) => void
+    setMessages:(messages: Message[]) => void,
+    isloadingChats: boolean,
+    chatHistory: {
+        _id: string;
+        userId: string;
+        messages: Array<{
+            content: string;
+            role: 'user' | 'assistant';
+            createdAt?: Date;
+            id: string;
+        }>;
+    }[],
+    refetch: () => void
 };
 
 const initialContext: StateType = {
@@ -28,7 +42,10 @@ const initialContext: StateType = {
     reload: async () => { return 'Reloaded' },
     stop: () => { },
     isLoading: false,
-    setMessages: ()=> {}
+    setMessages: ()=> {},
+    isloadingChats: false,
+    chatHistory : [],
+    refetch: async () => { return }
 };
 
 export const StateContext = createContext<StateType>(initialContext);
@@ -40,7 +57,19 @@ type Props = {
 export const StateManager = ({ children }: Props) => {
     const [openMenu, setOpenMenu] = useState<boolean>(false);
     const { messages, input, handleInputChange, handleSubmit, setInput, stop, reload, isLoading, setMessages } = useChat();
-    console.log(messages);
+    const {
+		refetch,
+		data: chatHistory = [],
+		isLoading: isloadingChats,
+	} = useQuery({
+		queryKey: ["chatHistory", ],
+		queryFn: async () => {
+			const res = await axios(
+				`/api/user`
+			);
+			return res.data;
+		},
+	});
 
     const stateData: StateType = {
         openMenu,
@@ -53,7 +82,10 @@ export const StateManager = ({ children }: Props) => {
         stop,
         reload,
         isLoading,
-        setMessages
+        setMessages,
+        chatHistory,
+        isloadingChats,
+        refetch,
     };
 
     return (
