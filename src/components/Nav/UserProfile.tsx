@@ -1,10 +1,12 @@
 import { Popover } from "@headlessui/react";
-import { UserButton, useClerk } from "@clerk/nextjs";
+import { UserButton, useClerk, useUser } from "@clerk/nextjs";
 import { redirect, useRouter } from "next/navigation";
 
 const UserProfile = () => {
     const { signOut } = useClerk();
-    const router = useRouter()
+    const router = useRouter();
+    const { user } = useUser();
+    
 
     return (
         <Popover className="relative outline-none">
@@ -28,7 +30,7 @@ const UserProfile = () => {
                     </div>
                 </div>  */}
                 <div className="relative -top-px grow -space-y-px overflow-hidden text-ellipsis whitespace-nowrap text-left text-white">
-                    <div className="font-semibold">Md Muhaiminul</div>
+                    <div className="font-semibold">{user?.fullName}</div>
                 </div>
             </Popover.Button>
 

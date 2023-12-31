@@ -74,7 +74,7 @@ const Page = () => {
                                                                         {feature.detail}
                                                                     </div>
                                                                 </div>
-                                                                <div className="absolute bottom-0 right-0 top-0 flex items-center rounded-xl bg-gradient-to-l from-[60%] pl-6 pr-4 opacity-0 hover:opacity-100">
+                                                                <div className="absolute bottom-0 right-0 top-0 flex items-center rounded-xl bg-gradient-to-l from-[60%] pl-6 pr-4 opacity-0 group-hover:opacity-100">
                                                                     <span className="">
                                                                         <div className="rounded-lg bg-[#202123] p-1">
                                                                             <svg

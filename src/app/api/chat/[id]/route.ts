@@ -12,7 +12,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
     if (!id) {
         return NextResponse.json({ success: false, error: "Missing 'id' parameter" }, { status: 400 });
     }
-    // Assuming 'isValidObjectId' is a function to validate MongoDB ObjectId format
+    // validate MongoDB ObjectId format
     if (!isValidObjectId(id)) {
         return NextResponse.json({ success: false, error: "Invalid 'id' parameter" }, { status: 400 });
     }
@@ -24,7 +24,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
         }
         return NextResponse.json(userChats);
     } catch (error) {
-        // Log the error for debugging purposes
+        // Log the error
         console.error("Error:", error);
         return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
     }
@@ -46,7 +46,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
         }
 
         // Update chat messages
-        chat.messages = body.messages; // Assuming 'messages' is a field in your ChatModel schema
+        chat.messages = body.messages;
 
         // Save the updated Chat document to the database
         const savedChat = await chat.save();
